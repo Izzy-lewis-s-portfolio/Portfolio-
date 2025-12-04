@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 export default function StudiosPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-black">
       {/* White Header */}
@@ -12,7 +15,9 @@ export default function StudiosPage() {
             <Link href="/" className="text-xl font-bold text-gray-900">
               Portfolio
             </Link>
-            <div className="flex gap-6">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-6">
               <Link href="/about">
                 <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors">
                   About Me
@@ -29,14 +34,49 @@ export default function StudiosPage() {
                 </button>
               </Link>
             </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4 border-t border-gray-200">
+              <Link href="/about" onClick={() => setMobileMenuOpen(false)}>
+                <button className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors">
+                  About Me
+                </button>
+              </Link>
+              <Link href="/about#contact-me" onClick={() => setMobileMenuOpen(false)}>
+                <button className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors">
+                  Contact Me
+                </button>
+              </Link>
+              <Link href="/studios" onClick={() => setMobileMenuOpen(false)}>
+                <button className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors">
+                  Studios
+                </button>
+              </Link>
+            </div>
+          )}
         </nav>
       </header>
 
       {/* Coming Soon Section */}
-      <section className="min-h-[calc(100vh-64px)] flex items-center justify-center">
+      <section className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="text-7xl lg:text-9xl font-bold text-white mb-12">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-white mb-8 sm:mb-12">
             Coming Soon
           </h1>
           {/* From Uiverse.io by alexruix */}

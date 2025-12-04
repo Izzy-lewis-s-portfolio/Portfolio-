@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 export default function AboutPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
       {/* White Header */}
@@ -12,7 +15,9 @@ export default function AboutPage() {
             <Link href="/" className="text-xl font-bold text-gray-900">
               Portfolio
             </Link>
-            <div className="flex gap-6">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-6">
               <button
                 onClick={() => document.getElementById('about-me')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors"
@@ -31,15 +36,58 @@ export default function AboutPage() {
                 </button>
               </Link>
             </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4 border-t border-gray-200">
+              <button
+                onClick={() => {
+                  document.getElementById('about-me')?.scrollIntoView({ behavior: 'smooth' });
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors"
+              >
+                About Me
+              </button>
+              <button
+                onClick={() => {
+                  document.getElementById('contact-me')?.scrollIntoView({ behavior: 'smooth' });
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors"
+              >
+                Contact Me
+              </button>
+              <Link href="/studios" onClick={() => setMobileMenuOpen(false)}>
+                <button className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 font-medium transition-colors">
+                  Studios
+                </button>
+              </Link>
+            </div>
+          )}
         </nav>
       </header>
 
       {/* Black About Me Section */}
-      <section id="about-me" className="bg-black text-white py-20 px-8">
+      <section id="about-me" className="bg-black text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold mb-8">About Me</h1>
-          <div className="space-y-6 text-lg leading-relaxed">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">About Me</h1>
+          <div className="space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed">
             <p>
               I'm Mehtaz, a builder at heart with a background in history, a mind for strategy, and a drive to turn ideas into reality. My path hasn't been linear, and that's exactly what fuels my work. I moved from the humanities into design, development, and entrepreneurship not by chance, but by choice and by building.
             </p>
@@ -54,17 +102,17 @@ export default function AboutPage() {
       </section>
 
       {/* Resume Section */}
-      <section className="bg-white text-black py-20 px-8 border-t border-gray-200">
+      <section className="bg-white text-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12">My Resume</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12">My Resume</h2>
 
           {/* Education */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-teal-600">EDUCATION</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-teal-600">EDUCATION</h3>
             <div>
-              <div className="flex justify-between items-start mb-2">
-                <h4 className="text-xl font-semibold">Bachelor of Arts (History) and Minor in Entrepreneurship</h4>
-                <span className="text-gray-600">Aug 2021 – May 2025</span>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                <h4 className="text-lg sm:text-xl font-semibold">Bachelor of Arts (History) and Minor in Entrepreneurship</h4>
+                <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">Aug 2021 – May 2025</span>
               </div>
               <p className="text-gray-600 mb-3">Nanyang Technological University, Singapore</p>
               <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -75,12 +123,12 @@ export default function AboutPage() {
 
           {/* Work Experience */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-teal-600">WORK EXPERIENCE</h3>
-            <div className="space-y-8">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-teal-600">WORK EXPERIENCE</h3>
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">Noverse Inc., Founder</h4>
-                  <span className="text-gray-600">March 2024 – Present</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">Noverse Inc., Founder</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">March 2024 – Present</span>
                 </div>
                 <p className="text-gray-600 mb-3">
                   <a href="https://msnovo.com" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-700 transition-colors">
@@ -96,33 +144,33 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">Research Intern</h4>
-                  <span className="text-gray-600">Jun 2024 – Oct 2024</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">Research Intern</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">Jun 2024 – Oct 2024</span>
                 </div>
-                <p className="text-gray-600 mb-3">Nanyang Technological University</p>
-                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <p className="text-gray-600 mb-3 text-sm sm:text-base">Nanyang Technological University</p>
+                <ul className="list-disc list-inside text-gray-700 space-y-2 text-sm sm:text-base">
                   <li>Conducted in-depth research on the latest scientific findings regarding climate change and its far-reaching consequences on global ecosystems, economies, and societies.</li>
                   <li>Analysed market trends, consumer behavior, and economic indicators to forecast the financial performance and potential growth opportunities within the established ASEAN and EU markets.</li>
                 </ul>
               </div>
 
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">Research Intern</h4>
-                  <span className="text-gray-600">May 2023 – Jul 2023</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">Research Intern</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">May 2023 – Jul 2023</span>
                 </div>
-                <p className="text-gray-600 mb-3">Ministry of Education</p>
-                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <p className="text-gray-600 mb-3 text-sm sm:text-base">Ministry of Education</p>
+                <ul className="list-disc list-inside text-gray-700 space-y-2 text-sm sm:text-base">
                   <li>Curated hundreds of relevant resources by meticulously analysing their alignment with curricular and assessment objectives</li>
                   <li>Organized the repository using an effective tagging system and insightful descriptions, ensuring smooth navigation and efficient search for teachers.</li>
                 </ul>
               </div>
 
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">Partnership & Coordination Intern</h4>
-                  <span className="text-gray-600">May 2022 – Jul 2022</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">Partnership & Coordination Intern</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">May 2022 – Jul 2022</span>
                 </div>
                 <p className="text-gray-600 mb-3">M.M. Ispahani Limited</p>
                 <ul className="list-disc list-inside text-gray-700 space-y-2">
@@ -136,34 +184,34 @@ export default function AboutPage() {
 
           {/* Co-Curricular Activities */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-teal-600">CO-CURRICULAR ACTIVITIES</h3>
-            <div className="space-y-6">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-teal-600">CO-CURRICULAR ACTIVITIES</h3>
+            <div className="space-y-4 sm:space-y-6">
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">Varsity Sports Association, Exco (Head of well-being)</h4>
-                  <span className="text-gray-600">Aug 2024 – April 2025</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">Varsity Sports Association, Exco (Head of well-being)</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">Aug 2024 – April 2025</span>
                 </div>
-                <ul className="list-disc list-inside text-gray-700">
+                <ul className="list-disc list-inside text-gray-700 text-sm sm:text-base">
                   <li>In-charge of the well-being of 250 Varsity athletes</li>
                 </ul>
               </div>
 
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">NTU Women's Football Team, Athlete</h4>
-                  <span className="text-gray-600">Aug 2023 – July 2025</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">NTU Women's Football Team, Athlete</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">Aug 2023 – July 2025</span>
                 </div>
-                <ul className="list-disc list-inside text-gray-700">
+                <ul className="list-disc list-inside text-gray-700 text-sm sm:text-base">
                   <li>Currently playing for NTU's Women's team and played a crucial role in the victory during Singapore National University Games.</li>
                 </ul>
               </div>
 
               <div>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-xl font-semibold">SOH Club, Member</h4>
-                  <span className="text-gray-600">Aug 2021 - April 2022</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-1 sm:gap-0">
+                  <h4 className="text-lg sm:text-xl font-semibold">SOH Club, Member</h4>
+                  <span className="text-gray-600 text-sm sm:text-base whitespace-nowrap">Aug 2021 - April 2022</span>
                 </div>
-                <ul className="list-disc list-inside text-gray-700">
+                <ul className="list-disc list-inside text-gray-700 text-sm sm:text-base">
                   <li>Worked with fellow members to bring events to life for the School of Humanities.</li>
                 </ul>
               </div>
@@ -172,7 +220,7 @@ export default function AboutPage() {
 
           {/* Skills & Interests */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-teal-600">SKILLS & INTERESTS</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-teal-600">SKILLS & INTERESTS</h3>
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">Languages:</h4>
@@ -203,16 +251,16 @@ export default function AboutPage() {
       </section>
 
       {/* Contact Me Section */}
-      <section id="contact-me" className="bg-black text-white py-20 px-8">
+      <section id="contact-me" className="bg-black text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">Contact Me</h2>
-          <div className="flex flex-col items-center gap-8">
-            <p className="text-lg text-center max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-center">Contact Me</h2>
+          <div className="flex flex-col items-center gap-6 sm:gap-8">
+            <p className="text-base sm:text-lg text-center max-w-2xl">
               Let's connect! Feel free to reach out through any of these platforms.
             </p>
 
             {/* Social Icons */}
-            <div className="flex gap-8">
+            <div className="flex gap-6 sm:gap-8">
               {/* GitHub */}
               <a
                 href="https://github.com/Grinchypoop"

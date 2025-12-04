@@ -32,10 +32,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen bg-black flex overflow-hidden">
-      {/* Left half - Typewriter text and button */}
-      <div className="w-1/2 h-screen flex flex-col items-start justify-center px-8 lg:px-20 overflow-hidden gap-8">
-        <h1 className="text-4xl lg:text-6xl font-bold text-white max-w-full break-words">
+    <section id="home" className="min-h-screen bg-black flex flex-col md:flex-row overflow-hidden">
+      {/* Text section - Top on mobile, Left on desktop */}
+      <div className="w-full md:w-1/2 h-auto md:h-screen flex flex-col items-start justify-center px-6 sm:px-8 lg:px-20 py-12 md:py-0 overflow-hidden gap-6 md:gap-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white max-w-full break-words">
           {displayedText}
           <span className="animate-pulse">|</span>
         </h1>
@@ -71,15 +71,15 @@ export default function Hero() {
         </Link>
       </div>
 
-      {/* Right half - SVG Image */}
-      <div className="w-1/2 h-screen flex items-center justify-center overflow-hidden">
+      {/* Image section - Bottom on mobile, Right on desktop */}
+      <div className="w-full md:w-1/2 h-64 sm:h-96 md:h-screen flex items-center justify-center overflow-hidden">
         <img
           src="/logo.svg"
           alt="Logo"
           className={`transition-all duration-[2000ms] ease-out ${
             showImage ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20"
           }`}
-          style={{ width: '400%', height: '400%', objectFit: 'contain' }}
+          style={{ width: '200%', height: '200%', objectFit: 'contain' }}
         />
       </div>
     </section>
